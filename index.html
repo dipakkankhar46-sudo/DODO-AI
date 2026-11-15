@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DODO AI</title>
+<style>
+body {
+  background: #101827;
+  color: white;
+  font-family: Arial;
+  text-align: center;
+  padding: 30px 15px;
+}
+h1 { color: #42c8ff; font-size: 38px; }
+.robot { font-size: 100px; margin: 30px; }
+button {
+  background: #168cff;
+  color: white;
+  border: 0;
+  border-radius: 30px;
+  padding: 15px 25px;
+  font-size: 18px;
+  margin: 10px;
+}
+#answer { margin-top: 25px; }
+</style>
+</head>
+<body>
+<h1>DODO AI</h1>
+<div class="robot">🤖</div>
+<h2>नमस्ते! मैं DODO हूँ।</h2>
+<p>आपका हिंदी AI Assistant</p>
+<button onclick="speak()">DODO बोलो</button>
+<button onclick="listen()">🎤 बात करो</button>
+<p id="answer">मैं आपकी मदद के लिए तैयार हूँ।</p>
+
+<script>
+function speak() {
+ const msg = new SpeechSynthesisUtterance(
+ "नमस्ते! मैं डोडो हूँ। बताइए मैं आपकी क्या मदद कर सकता हूँ।"
+ );
+ msg.lang = "hi-IN";
+ speechSynthesis.speak(msg);
+}
+
+function listen() {
+ const Speech = window.SpeechRecognition ||
+ window.webkitSpeechRecognition;
+
+ if (!Speech) {
+  document.getElementById("answer").innerText =
+  "इस ब्राउज़र में Voice Recognition उपलब्ध नहीं है।";
+  return;
+ }
+
+ const recognition = new Speech();
+ recognition.lang = "hi-IN";
+ recognition.onresult = function(e) {
+  document.getElementById("answer").innerText =
+  e.results[0][0].transcript;
+ };
+ recognition.start();
+}
+</script>
+</body>
+</html>
