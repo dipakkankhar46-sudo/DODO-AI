@@ -1,6 +1,7 @@
 
 package com.dodoai.assistant
-
+import android.net.Uri
+import android.content.ActivityNotFoundException
 import android.app.Activity
 import android.os.Bundle
 import android.content.Intent
