@@ -23,7 +23,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-
+      - name: Check AndroidManifest XML
+        run: python3 -c "import xml.etree.ElementTree as ET; ET.parse('app/src/main/AndroidManifest.xml'); print('Manifest XML OK')"
       - name: Build APK
         run: gradle --version && gradle --no-daemon assembleDebug
 
