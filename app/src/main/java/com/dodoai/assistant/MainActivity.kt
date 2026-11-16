@@ -126,7 +126,25 @@ class MainActivity : Activity() {
             command.contains("बंद") -> {
                 speak("ठीक है।")
             }
+command.contains("व्हाट्सएप मैसेज") ||
+command.contains("whatsapp message") -> {
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/"))
+    try {
+        startActivity(intent)
+        speak("WhatsApp खोल रहा हूँ।")
+    } catch (e: Exception) {
+        speak("WhatsApp नहीं खुल पाया।")
+    }
+}
 
+command.contains("एसएमएस") ||
+command.contains("sms") -> {
+    val intent = Intent(Intent.ACTION_SENDTO)
+    intent.data = Uri.parse("smsto:")
+    intent.putExtra("sms_body", "")
+    startActivity(intent)
+    speak("SMS खोल रहा हूँ।")
+}
             else -> {
                 speak("मैंने आपका आदेश सुना है। यह कमांड अभी मेरे अंदर जोड़ी नहीं गई है।")
             }
